@@ -47,6 +47,9 @@ export default function RootLayout({ children }) {
               p-4 overflow-y-auto thin-scrollbar transition-transform duration-300 z-40
               ${notifyOpen ? "translate-x-0" : "translate-x-full"}
             `}
+            style={{
+              scrollbarWidth: "none",
+            }}
           >
             <Notification />
             <ActivityItem />
