@@ -1,42 +1,28 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* src/app/globals.css */
+
+/* 1. Import Tailwind (v4 uses the new @import syntax) */
+@import "tailwindcss";
+
+/* 2. Your custom theme variables */
+@theme {
+  --color-primary: #6366f1;   /* indigo-500 */
+  --color-sidebar: #1f2937;   /* gray-800 */
+  --color-border: #e5e7eb;    /* gray-300 */
+  --color-text: #374151;
+  --text-scrollText:14px;      /* gray-700 */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* 3. Optional: Use the variables in Tailwind classes */
+@layer utilities {
+  .bg-primary { background-color: var(--color-primary); }
+  .bg-sidebar { background-color: var(--color-sidebar); }
+  .border-custom { border-color: var(--color-border); }
+  .text-main { color: var(--color-text); }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+  /* Thin scrollbar (from previous answer) */
+  .thin-scrollbar::-webkit-scrollbar { width: 1px; height: 1px; }
+  .thin-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .thin-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  .thin-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  .thin-scrollbar { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
 }

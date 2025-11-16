@@ -1,66 +1,52 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import StatCard from "@/components/StatCard";
+import LineChart from "@/components/LineChart";
+import BarChart from "@/components/BarChart";
+import TrafficSources from "@/components/TrafficSources";
+import TrafficByDevice from "@/components/PieChart";
+export default function Dashboard() {
 
-export default function Home() {
+  const stats = [
+    { id: 1, title: "Views", value: "7,265", change: "10%", up: true },
+    { id: 2, title: "Visits", value: "3,671", change: "0.03%", up: false },
+    { id: 3, title: "New Users", value: "156", change: "15.03%", up: true },
+    { id: 4, title: "Active Users", value: "2,318", change: "4.08%", up: true },
+  ];
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="space-y-6">
+      {/* Top Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {stats.map((item) => (
+          <StatCard
+            key={item.id}
+            title={item.title}
+            value={item.value}
+            change={item.change}
+            up={item.up}
+            id={item.id}
+          />
+        ))}
+      </div>
+
+      {/* Charts Row */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Total Users Chart */}
+        <div className="lg:col-span-2 bg-gray-50 p-5 rounded-xl  border border-gray-50">
+          <LineChart />
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+
+        {/* Traffic by Device */}
+        <BarChart />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <TrafficByDevice />
+
+
+        <TrafficSources />
+
+      </div>
+
     </div>
   );
 }
