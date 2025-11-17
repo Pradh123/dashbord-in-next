@@ -5,6 +5,7 @@
 
 /* 2. Your custom theme variables */
 @theme {
+  --breakpoint-pm: 420px;
   --color-primary: #6366f1;   /* indigo-500 */
   --color-sidebar: #1f2937;   /* gray-800 */
   --color-border: #e5e7eb;    /* gray-300 */

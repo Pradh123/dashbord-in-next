@@ -9,10 +9,28 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useEffect, useState } from "react";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 export default function TrafficByDevice() {
+  const [barSize, setBarSize] = useState(40);
+
+  // Auto adjust on mount + resize
+  const updateBarSize = () => {
+    if (window.innerWidth < 480) setBarSize(25); // very small mobile
+    else if (window.innerWidth < 640) setBarSize(35); // normal mobile
+    else if (window.innerWidth < 1024) setBarSize(40); // tablet
+    else setBarSize(40); // desktop
+  };
+
+  useEffect(() => {
+    updateBarSize(); // run on mount
+
+    window.addEventListener("resize", updateBarSize);
+    return () => window.removeEventListener("resize", updateBarSize);
+  }, []);
+
   const data = {
     labels: ["Linux", "Mac", "iOS", "Windows", "Android", "Other"],
     datasets: [
@@ -28,7 +46,7 @@ export default function TrafficByDevice() {
           "#7CD97B",
         ],
         borderRadius: 12,
-        barThickness: 40,
+        barThickness: barSize, // 👈 dynamic size
       },
     ],
   };
@@ -56,12 +74,9 @@ export default function TrafficByDevice() {
         max: 30000,
         grid: { display: false },
         border: { display: false },
-
         ticks: {
           color: "#999",
           font: { size: 13 },
-
-          // Show: 0, 10K, 20K, 30K
           callback: (value) => {
             if (value === 0) return "0";
             if (value === 10000) return "10K";
@@ -76,7 +91,9 @@ export default function TrafficByDevice() {
 
   return (
     <div className="w-full bg-gray-50 border border-gray-50 rounded-3xl p-6 relative">
-      <h2 className="text-[14px] font-semibold mb-4 hover:translate-x-1 transition-all duration-700 ease-out">Traffic by Device</h2>
+      <h2 className="text-[14px] font-semibold mb-4 hover:translate-x-1 transition-all duration-700 ease-out">
+        Traffic by Device
+      </h2>
 
       <div className="w-full h-80">
         <Bar data={data} options={options} />

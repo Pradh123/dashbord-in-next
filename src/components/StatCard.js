@@ -56,7 +56,7 @@ export default function StatCard({ title, value, change, up, id }) {
   };
 
   return (
-    <div className={`${bgColor} px-5 py-4 rounded-2xl shadow-sm relative`}>
+    <div className={`${bgColor} px-5 py-4 flex pm:block items-center flex-col rounded-2xl shadow-sm relative`}>
       <h3 className="text-sm text-gray-500 hover:translate-x-1 transition-all duration-700 ease-out">{title}</h3>
 
       <div className="flex py-3 gap-6 items-center">

@@ -119,18 +119,19 @@ export default function LineChart() {
   return (
     <div className="w-full bg-gray-50 rounded-3xl p-6">
       {/* Tabs + Legend (same UI) */}
-      <div className="flex items-center gap-6 mb-4">
-        <span className="font-semibold text-black text-[14px] pb-1">
-          Total Users
-        </span>
-        <span className="text-gray-500 hover:text-black text-[14px] cursor-pointer">
-          Total Projects
-        </span>
-        <span className="text-gray-500 hover:text-black text-[14px] cursor-pointer">
-          Operating Status
-        </span>
-
-        <div className="h-6 w-px bg-gray-300 mx-2"></div>
+      <div className="flex flex-col sm:flex-row  gap-2 mb-4">
+        <div className=" flex items-center gap-3">
+          <span className="font-semibold text-black text-[14px] pb-1">
+            Total Users
+          </span>
+          <span className="text-gray-500 hover:text-black text-[14px] cursor-pointer">
+            Total Projects
+          </span>
+          <span className="text-gray-500 hover:text-black text-[14px] cursor-pointer">
+            Operating Status
+          </span>
+        </div>
+        <div className="h-6 hidden sm:block w-px bg-gray-300 mx-2"></div>
 
         {/* CLICKABLE custom legend */}
         <div className="flex items-center gap-6 text-sm text-gray-700">
@@ -151,7 +152,7 @@ export default function LineChart() {
       </div>
 
       {/* Chart */}
-      <div className="w-full h-72">
+      <div className="w-[full] h-44 pm:h-72">
         <Line ref={chartRef} data={data} options={options} />
       </div>
     </div>
